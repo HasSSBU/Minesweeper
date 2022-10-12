@@ -2,10 +2,10 @@ public class NumberSpace extends Tile{
 
     int value;
 
-    public NumberSpace(int i){
+    public NumberSpace(){
         super();
-        this.value = i;
+        this.value = 0;
+        this.name = "0";
+
     }
-
-
 }

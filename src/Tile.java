@@ -3,7 +3,7 @@ public class Tile {
     private boolean hidden;
     private boolean flagged;
     protected boolean mine;
-
+    protected String name;
     protected int value;
 
     public Tile(){
@@ -18,12 +18,14 @@ public class Tile {
         tile.hidden = false;
     }
 
-    public void setFlag(Tile tile){
-        tile.flagged = !tile.flagged;
+    public void setFlag(boolean x){
+        this.flagged = x;
     }
-
-    public void setValue(int i){
-        this.value = i;
+    public boolean getFlag(){
+        return flagged;
+    }
+    public void addMine(){
+        this.value = this.value + 1;
     }
 
     public boolean getMine(){
@@ -33,4 +35,16 @@ public class Tile {
         return this.value;
     }
 
+    public void setName(String n){
+        this.name = n;
+    }
+    public String getName(){
+        return name;
+    }
+    public boolean getHidden(){
+        return this.hidden;
+    }
+    public void setHidden(boolean x){
+        this.hidden = x;
+    }
 }

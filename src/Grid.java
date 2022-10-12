@@ -1,68 +1,258 @@
+
+
 public class Grid {
 
     Tile[][] table;
     int numbOfMines;
+    boolean active = true;
+    int hiddenTiles;
 
-    public Grid(){
-        table = new Tile[6][6];
-        numbOfMines = 6;
+    public Grid(int w, int h, int b){
+        table = new Tile[w][h];
+        numbOfMines = b;
         setMines(table);
+        hiddenTiles = table.length* table.length;
     }
 
     public void setMines(Tile[][] table){
-        for(int i=0; i <= numbOfMines; i++) {
-            table[(int) (Math.random() * 5)][(int) (Math.random() * 5)] = new Mine();
+        for(int i=0; i <= numbOfMines -1; i++) {
+            table[(int) (Math.random() * table.length-1)][(int) (Math.random() * table.length-1)] = new Mine();
+
         }
 
         setZeroes(table);
         setValues(table);
-        setRest(table);
-
+        setNames(table);
     }
 
     public void setZeroes(Tile[][] table){
-        for(int i = 0; i <= table.length; i++){
-            for(int j = 0; j <= table.length; j++) {
+        for(int i = 0; i < table.length; i++){
+            for(int j = 0; j < table.length; j++) {
                 if (table[i][j] == null) {
-                    table[i][j] = new NumberSpace(0);
+                    table[i][j] = new NumberSpace();
                 }
             }
         }
     }
     public void setValues(Tile[][] table){
-        for(int i = 0; i <= table.length; i++){
-            for(int j = 0; j <= table.length; j++) {
+        for(int i = 0; i < table.length; i++){
+            for(int j = 0; j < table.length; j++) {
                 if(table[i][j].getMine()){
-                    table[i-1][j-1].setValue(table[i][j].getValue() + 1);
-                    table[i-1][j].setValue(table[i][j].getValue() + 1);
-                    table[i-1][j+1].setValue(table[i][j].getValue() + 1);
+                    if(i == 0 && j == 0){
+                        table[i][j + 1].addMine();
+                        table[i + 1][j].addMine();
+                        table[i + 1][j + 1].addMine();
+                    }else if (i == table.length-1 && j == table.length-1) {
+                        table[i - 1][j - 1].addMine();
+                        table[i - 1][j].addMine();
+                        table[i][j - 1].addMine();
+                    }else if(i == 0) {
+                        table[i][j - 1].addMine();
+                        table[i][j + 1].addMine();
+                        table[i + 1][j - 1].addMine();
+                        table[i + 1][j].addMine();
+                        table[i + 1][j + 1].addMine();
+                    }else if(i == table.length-1){
+                        table[i - 1][j - 1].addMine();
+                        table[i - 1][j].addMine();
+                        table[i - 1][j + 1].addMine();
+                        table[i][j - 1].addMine();
+                        table[i][j + 1].addMine();
+                    }else if(j == 0){
+                        table[i - 1][j].addMine();
+                        table[i - 1][j + 1].addMine();
+                        table[i][j + 1].addMine();
+                        table[i + 1][j].addMine();
+                        table[i + 1][j + 1].addMine();
+                    }else if(j == table.length-1){
+                        table[i - 1][j - 1].addMine();
+                        table[i - 1][j].addMine();
+                        table[i][j - 1].addMine();
+                        table[i + 1][j - 1].addMine();
+                        table[i + 1][j].addMine();
+                    }else{
+                        table[i - 1][j - 1].addMine();
+                        table[i - 1][j].addMine();
+                        table[i - 1][j + 1].addMine();
 
-                    table[i][j-1].setValue(table[i][j].getValue() + 1);
-                    table[i][j+1].setValue(table[i][j].getValue() + 1);
+                        table[i][j - 1].addMine();
+                        table[i][j + 1].addMine();
 
-                    table[i+1][j-1].setValue(table[i][j].getValue() + 1);
-                    table[i+1][j].setValue(table[i][j].getValue() + 1);
-                    table[i+1][j+1].setValue(table[i][j].getValue() + 1);
+                        table[i + 1][j - 1].addMine();
+                        table[i + 1][j].addMine();
+                        table[i + 1][j + 1].addMine();
+                    }
                 }
             }
         }
     }
 
-    public void setRest(Tile[][] table){
-        for(int i = 0; i <= table.length; i++) {
-            for (int j = 0; j <= table.length; j++) {
-                if(table[i][j].getValue() == 0){
-                    table[i][j] = new Tile();
+    public void showTiles(int across, int down) {
+        if(table[across][down].getHidden()){
+            this.hiddenTiles -=1;
+        }
+        this.table[across][down].setHidden(false);
+        this.table[across][down].setFlag(false);
+
+
+        if(this.table[across][down].getValue() == 0){
+            int[] acrossX = {across -1, across, across +1};
+            int[] downY = {down -1, down, down +1};
+            for(int i : acrossX){
+                if(i >= 0 && i < this.table.length){
+                    for(int j : downY){
+                        if(j >= 0 && j < this.table.length){
+                            if(this.table[i][j].getHidden()){
+                                this.table[i][j].setHidden(false);
+                                System.out.println(getTable());
+                                showTiles(i,j);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+/*
+        if(across == 0 && down == 0){
+            for(int i = 0; i<=1; i++){
+                for(int j = 0; j<= 1; j++){
+                    if(table[i][j].getHidden()){
+                        showTiles(i,j);
+                    }
+                }
+            }
+        }else if(across == table.length-1 && down == table.length-1) {
+            for (int i = across - 1; i <= table.length; i++) {
+                for (int j = down - 1; j <= table.length; j++) {
+                    if (table[i][j].getHidden()) {
+                        showTiles(i, j);
+                    }
+                }
+            }
+        }else if(across == table.length-1 && down == 0){
+            for (int i = across - 1; i <= table.length; i++) {
+                for (int j = 0; j <= down + 1; j++) {
+                    if (table[i][j].getHidden()) {
+                        showTiles(i, j);
+                    }
+                }
+            }
+        }else if(across == 0 && down == table.length-1){
+            for (int i = 0; i <= across + 1; i++) {
+                for (int j = down -1; j <= table.length; j++) {
+                    if (table[i][j].getHidden()) {
+                        showTiles(i, j);
+                    }
+                }
+            }
+        }else if(across == 0 ) {
+            for (int i = 0; i <= 1; i++) {
+                for (int j = down - 1; j <= down + 1; j++) {
+                    if (table[i][j].getHidden()) {
+                        showTiles(i, j);
+                    }
+                }
+            }
+        }else if(down == 0){
+            for(int i = across -1; i<= across +1; i++){
+                for(int j = 0; j<=1; j++){
+                    if(table[i][j].getHidden()){
+                        showTiles(i,j);
+                    }
+                }
+            }
+        }else if(across == table.length-1){
+            for(int i = across -1; i<= table.length; i++){
+                for(int j = down -1; j<= down +1; j++){
+                    if(table[i][j].getHidden()){
+                        showTiles(i,j);
+                    }
+                }
+            }
+        }else if(down == table.length-1){
+            for(int i = across -1; i<= across +1; i++){
+                for(int j = down -1; j<= table.length; j++){
+                    if(table[i][j].getHidden()){
+                        showTiles(i,j);
+                    }
+                }
+            }
+        }else{
+            for(int i = across -1; i<= across +1; i++){
+                for(int j = down -1; j<= down +1; j++){
+                    if(table[i][j].getHidden()){
+                        showTiles(i,j);
+                    }
+                }
+            }
+        }
+
+        if(this.table[across][down].getValue() == 0 && !this.table[across][down].getHidden()){
+            System.out.println("check 1 good");
+            setNames(this.table);
+            System.out.println(getTable());
+            if(across-1 >= 0) {
+                System.out.println("across good");
+                showTiles(across - 1, down);
+
+            }
+            if (down -1 >= 0){
+                System.out.println("down good");
+                showTiles(across, down -1);
+            }
+        }
+
+*/
+
+
+
+    }
+
+
+
+    public void setFlag(int across, int down){
+        if(this.table[across][down].getHidden()) {
+            this.table[across][down].setFlag(true);
+        }else{
+            System.out.println("Can not place Flag, try again");
+        }
+
+    }
+
+    public void setNames(Tile[][] table){
+        for (Tile[] tiles : table) {
+            for (int j = 0; j < table.length; j++) {
+                if(tiles[j].getHidden()){
+                    tiles[j].setName("[]");
+                }else if(tiles[j].getFlag()){
+                    tiles[j].setName(" #");
+                } else if (tiles[j].getMine()) {
+                    tiles[j].setName(" M");
+                } else {
+                    tiles[j].setName(" " + String.valueOf(tiles[j].value));
                 }
             }
         }
     }
 
-    public Tile[][] getTable() {
-        return table;
+    public String getTable() {
+        StringBuilder out = new StringBuilder();
+        for (int i= 0; i< table.length; i++) {
+            out.append("    ").append(i+1).append("  ");
+        }
+        out.append("\n");
+        for (int i= 0; i< table.length; i++) {
+            out.append(i+1).append("| ");
+            for (int j = 0; j < table.length; j++) {
+                out.append(table[i][j].getName()).append("     ");
+                //out += i + "," + j + "    ";
+            }
+            out.append("\n");
+        }
+        out.append("Bombs on board: ").append(numbOfMines).append("\n");
+        out.append("Tiles left to clear: ").append(hiddenTiles).append("\n");
+        return out.toString();
     }
 
-    public void setTable(Tile[][] table) {
-        this.table = table;
-    }
 }
