@@ -107,9 +107,9 @@ public class Grid {
             int[] acrossX = {across - 1, across, across + 1};
             int[] downY = {down - 1, down, down + 1};
             for (int i : acrossX) {
-                if (i >= 0 && i < this.table.length) {
+                if (acrossBounds(i)) {
                     for (int j : downY) {
-                        if (j >= 0 && j < this.table.length) {
+                        if (downBounds(j)) {
                             if (this.table[i][j].getHidden()) {
                                 this.table[i][j].setHidden(false);
                                 this.hiddenTiles -= 1;
@@ -124,6 +124,14 @@ public class Grid {
                 }
             }
         }
+    }
+
+    public boolean downBounds(int j) {
+        return j >= 0 && j < this.table.length;
+    }
+
+    public boolean acrossBounds(int i){
+        return i >= 0 && i < this.table.length;
     }
 
     public void setFlag(int across, int down){
