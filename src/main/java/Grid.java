@@ -109,16 +109,14 @@ public class Grid {
             for (int i : acrossX) {
                 if (acrossBounds(i)) {
                     for (int j : downY) {
-                        if (downBounds(j)) {
-                            if (this.table[i][j].getHidden()) {
-                                this.table[i][j].setHidden(false);
-                                this.hiddenTiles -= 1;
-                                if(hiddenTiles == numbOfMines){
-                                    this.active = false;
-                                }
-                                System.out.println(getTable());
-                                showTiles(i, j);
+                        if (downBounds(j) && this.table[i][j].getHidden()) {
+                            this.table[i][j].setHidden(false);
+                            this.hiddenTiles -= 1;
+                            if(hiddenTiles == numbOfMines){
+                                this.active = false;
                             }
+                            System.out.println(getTable());
+                            showTiles(i, j);
                         }
                     }
                 }
