@@ -7,9 +7,9 @@ public class Grid {
     boolean active = true;
     int hiddenTiles;
 
-    public Grid(int w, int h, int b){
-        table = new Tile[w][h];
-        numbOfMines = b;
+    public Grid(){
+        table = new Tile[9][9];
+        numbOfMines = 8;
         setMines(table);
         hiddenTiles = table.length* table.length;
     }
@@ -88,105 +88,41 @@ public class Grid {
     }
 
     public void showTiles(int across, int down) {
-        if(table[across][down].getHidden()){
-            this.hiddenTiles -=1;
+        if (table[across][down].getHidden()) {
+            this.hiddenTiles -= 1;
+        }
+        if(hiddenTiles == numbOfMines){
+            this.active = false;
         }
         this.table[across][down].setHidden(false);
         this.table[across][down].setFlag(false);
 
 
-        if(this.table[across][down].getValue() == 0){
-            int[] acrossX = {across -1, across, across +1};
-            int[] downY = {down -1, down, down +1};
-            for(int i : acrossX){
-                if(i >= 0 && i < this.table.length){
-                    for(int j : downY){
-                        if(j >= 0 && j < this.table.length){
-                            if(this.table[i][j].getHidden()){
+        if (this.table[across][down].getValue() == 0) {
+            int[] acrossX = {across - 1, across, across + 1};
+            int[] downY = {down - 1, down, down + 1};
+            for (int i : acrossX) {
+                if (i >= 0 && i < this.table.length) {
+                    for (int j : downY) {
+                        if (j >= 0 && j < this.table.length) {
+                            if (this.table[i][j].getHidden()) {
                                 this.table[i][j].setHidden(false);
+                                this.hiddenTiles -= 1;
+                                if(hiddenTiles == numbOfMines){
+                                    this.active = false;
+                                }
                                 System.out.println(getTable());
-                                showTiles(i,j);
+                                showTiles(i, j);
                             }
                         }
                     }
                 }
             }
         }
-
+    }
 /*
-        if(across == 0 && down == 0){
-            for(int i = 0; i<=1; i++){
-                for(int j = 0; j<= 1; j++){
-                    if(table[i][j].getHidden()){
-                        showTiles(i,j);
-                    }
-                }
-            }
-        }else if(across == table.length-1 && down == table.length-1) {
-            for (int i = across - 1; i <= table.length; i++) {
-                for (int j = down - 1; j <= table.length; j++) {
-                    if (table[i][j].getHidden()) {
-                        showTiles(i, j);
-                    }
-                }
-            }
-        }else if(across == table.length-1 && down == 0){
-            for (int i = across - 1; i <= table.length; i++) {
-                for (int j = 0; j <= down + 1; j++) {
-                    if (table[i][j].getHidden()) {
-                        showTiles(i, j);
-                    }
-                }
-            }
-        }else if(across == 0 && down == table.length-1){
-            for (int i = 0; i <= across + 1; i++) {
-                for (int j = down -1; j <= table.length; j++) {
-                    if (table[i][j].getHidden()) {
-                        showTiles(i, j);
-                    }
-                }
-            }
-        }else if(across == 0 ) {
-            for (int i = 0; i <= 1; i++) {
-                for (int j = down - 1; j <= down + 1; j++) {
-                    if (table[i][j].getHidden()) {
-                        showTiles(i, j);
-                    }
-                }
-            }
-        }else if(down == 0){
-            for(int i = across -1; i<= across +1; i++){
-                for(int j = 0; j<=1; j++){
-                    if(table[i][j].getHidden()){
-                        showTiles(i,j);
-                    }
-                }
-            }
-        }else if(across == table.length-1){
-            for(int i = across -1; i<= table.length; i++){
-                for(int j = down -1; j<= down +1; j++){
-                    if(table[i][j].getHidden()){
-                        showTiles(i,j);
-                    }
-                }
-            }
-        }else if(down == table.length-1){
-            for(int i = across -1; i<= across +1; i++){
-                for(int j = down -1; j<= table.length; j++){
-                    if(table[i][j].getHidden()){
-                        showTiles(i,j);
-                    }
-                }
-            }
-        }else{
-            for(int i = across -1; i<= across +1; i++){
-                for(int j = down -1; j<= down +1; j++){
-                    if(table[i][j].getHidden()){
-                        showTiles(i,j);
-                    }
-                }
-            }
-        }
+        This section was my original idea, Spread to one corner of the array then go to the other.
+        Corners weren't certain though so items would get excluded.
 
         if(this.table[across][down].getValue() == 0 && !this.table[across][down].getHidden()){
             System.out.println("check 1 good");
@@ -202,15 +138,7 @@ public class Grid {
                 showTiles(across, down -1);
             }
         }
-
 */
-
-
-
-    }
-
-
-
     public void setFlag(int across, int down){
         if(this.table[across][down].getHidden()) {
             this.table[across][down].setFlag(true);
