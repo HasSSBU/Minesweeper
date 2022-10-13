@@ -1,3 +1,5 @@
+import java.security.SecureRandom;
+
 public class Grid {
 
     Tile[][] table;
@@ -14,7 +16,10 @@ public class Grid {
 
     public void setMines(Tile[][] table){
         for(int i=0; i <= numbOfMines -1; i++) {
-            table[(int) (Math.random() * table.length-1)][(int) (Math.random() * table.length-1)] = new Mine();
+            SecureRandom random = new SecureRandom();
+            int across = random.nextInt(table.length);
+            int down = random.nextInt(table.length);
+            table[across][down] = new Mine();
 
         }
 
