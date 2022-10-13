@@ -94,8 +94,10 @@ public class Grid {
         if(hiddenTiles == numbOfMines){
             this.active = false;
         }
+        if(table[across][down].getMine()){
+            this.active = false;
+        }
         this.table[across][down].setHidden(false);
-        this.table[across][down].setFlag(false);
 
 
         if (this.table[across][down].getValue() == 0) {
@@ -141,13 +143,15 @@ public class Grid {
 */
     public void setFlag(int across, int down){
         if(this.table[across][down].getHidden()) {
-            this.table[across][down].setFlag(true);
+            this.table[across][down].setFlag();
+            this.table[across][down].setHidden(false);
+        }else if(this.table[across][down].getFlag()){
+            this.table[across][down].setFlag();
+            this.table[across][down].setHidden(true);
         }else{
             System.out.println("Can not place Flag, try again");
         }
-
     }
-
     public void setNames(Tile[][] table){
         for (Tile[] tiles : table) {
             for (int j = 0; j < table.length; j++) {
@@ -169,7 +173,10 @@ public class Grid {
         for (int i= 0; i< table.length; i++) {
             out.append("    ").append(i+1).append("  ");
         }
-        out.append("\n");
+        out.append("""
+
+
+                """);
         for (int i= 0; i< table.length; i++) {
             out.append(i+1).append("| ");
             for (int j = 0; j < table.length; j++) {

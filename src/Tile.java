@@ -18,8 +18,8 @@ public class Tile {
         tile.hidden = false;
     }
 
-    public void setFlag(boolean x){
-        this.flagged = x;
+    public void setFlag(){
+        this.flagged = !this.flagged;
     }
     public boolean getFlag(){
         return flagged;
