@@ -11,14 +11,14 @@ public class Grid {
         table = new Tile[9][9];
         numbOfMines = 10;
         setMines(table);
-        hiddenTiles = table.length* table.length;
+        hiddenTiles = table.length * table[0].length;
     }
 
     public void setMines(Tile[][] table){
         for(int i=0; i <= numbOfMines -1; i++) {
             SecureRandom random = new SecureRandom();
             int across = random.nextInt(table.length);
-            int down = random.nextInt(table.length);
+            int down = random.nextInt(table[0].length);
             table[across][down] = new Mine();
 
         }
@@ -30,7 +30,7 @@ public class Grid {
 
     public void setZeroes(Tile[][] table){
         for(int i = 0; i < table.length; i++){
-            for(int j = 0; j < table.length; j++) {
+            for(int j = 0; j < table[0].length; j++) {
                 if (table[i][j] == null) {
                     table[i][j] = new NumberSpace();
                 }
@@ -39,59 +39,58 @@ public class Grid {
     }
     public void setValues(Tile[][] table){
         for(int i = 0; i < table.length; i++){
-            for(int j = 0; j < table.length; j++) {
+            for(int j = 0; j < table[0].length; j++) {
                 if(table[i][j].getMine()){
                     if(i == 0 && j == 0){
-                        table[i][j + 1].addMine();
-                        table[i + 1][j].addMine();
-                        table[i + 1][j + 1].addMine();
-                    }else if (i == table.length-1 && j == table.length-1) {
-                        table[i - 1][j - 1].addMine();
-                        table[i - 1][j].addMine();
-                        table[i][j - 1].addMine();
+                        table[i + 1][j].addNearbyMine();
+                        table[i + 1][j + 1].addNearbyMine();
+                    }else if (i == table.length-1 && j == table[0].length-1) {
+                        table[i - 1][j - 1].addNearbyMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i][j - 1].addNearbyMine();
                     }else if (i == table.length-1 && j == 0) {
-                        table[i - 1][j + 1].addMine();
-                        table[i - 1][j].addMine();
-                        table[i][j +1].addMine();
-                    }else if (i == 0 && j == table.length-1) {
-                        table[i + 1][j - 1].addMine();
-                        table[i + 1][j].addMine();
-                        table[i][j - 1].addMine();
+                        table[i - 1][j + 1].addNearbyMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i][j +1].addNearbyMine();
+                    }else if (i == 0 && j == table[0].length-1) {
+                        table[i + 1][j - 1].addNearbyMine();
+                        table[i + 1][j].addNearbyMine();
+                        table[i][j - 1].addNearbyMine();
                     }else if(i == 0) {
-                        table[i][j - 1].addMine();
-                        table[i][j + 1].addMine();
-                        table[i + 1][j - 1].addMine();
-                        table[i + 1][j].addMine();
-                        table[i + 1][j + 1].addMine();
+                        table[i][j - 1].addNearbyMine();
+                        table[i][j + 1].addNearbyMine();
+                        table[i + 1][j - 1].addNearbyMine();
+                        table[i + 1][j].addNearbyMine();
+                        table[i + 1][j + 1].addNearbyMine();
                     }else if(i == table.length-1){
-                        table[i - 1][j - 1].addMine();
-                        table[i - 1][j].addMine();
-                        table[i - 1][j + 1].addMine();
-                        table[i][j - 1].addMine();
-                        table[i][j + 1].addMine();
+                        table[i - 1][j - 1].addNearbyMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i - 1][j + 1].addNearbyMine();
+                        table[i][j - 1].addNearbyMine();
+                        table[i][j + 1].addNearbyMine();
                     }else if(j == 0){
-                        table[i - 1][j].addMine();
-                        table[i - 1][j + 1].addMine();
-                        table[i][j + 1].addMine();
-                        table[i + 1][j].addMine();
-                        table[i + 1][j + 1].addMine();
-                    }else if(j == table.length-1){
-                        table[i - 1][j - 1].addMine();
-                        table[i - 1][j].addMine();
-                        table[i][j - 1].addMine();
-                        table[i + 1][j - 1].addMine();
-                        table[i + 1][j].addMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i - 1][j + 1].addNearbyMine();
+                        table[i][j + 1].addNearbyMine();
+                        table[i + 1][j].addNearbyMine();
+                        table[i + 1][j + 1].addNearbyMine();
+                    }else if(j == table[0].length-1){
+                        table[i - 1][j - 1].addNearbyMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i][j - 1].addNearbyMine();
+                        table[i + 1][j - 1].addNearbyMine();
+                        table[i + 1][j].addNearbyMine();
                     }else{
-                        table[i - 1][j - 1].addMine();
-                        table[i - 1][j].addMine();
-                        table[i - 1][j + 1].addMine();
+                        table[i - 1][j - 1].addNearbyMine();
+                        table[i - 1][j].addNearbyMine();
+                        table[i - 1][j + 1].addNearbyMine();
 
-                        table[i][j - 1].addMine();
-                        table[i][j + 1].addMine();
+                        table[i][j - 1].addNearbyMine();
+                        table[i][j + 1].addNearbyMine();
 
-                        table[i + 1][j - 1].addMine();
-                        table[i + 1][j].addMine();
-                        table[i + 1][j + 1].addMine();
+                        table[i + 1][j - 1].addNearbyMine();
+                        table[i + 1][j].addNearbyMine();
+                        table[i + 1][j + 1].addNearbyMine();
                     }
                 }
             }
@@ -136,7 +135,7 @@ public class Grid {
     }
 
     public boolean downBounds(int j) {
-        return j >= 0 && j < this.table.length;
+        return j >= 0 && j < this.table[0].length;
     }
 
     public boolean acrossBounds(int i){
@@ -156,7 +155,7 @@ public class Grid {
     }
     public void setNames(Tile[][] table){
         for (Tile[] tiles : table) {
-            for (int j = 0; j < table.length; j++) {
+            for (int j = 0; j < table[0].length; j++) {
                 if(tiles[j].getHidden()){
                     tiles[j].setName("[]");
                 }else if(tiles[j].getFlag()){
@@ -172,7 +171,7 @@ public class Grid {
 
     public String getTable() {
         StringBuilder out = new StringBuilder();
-        for (int i= 0; i< table.length; i++) {
+        for (int i= 0; i< table[0].length; i++) {
             out.append("    ").append(i+1).append("  ");
         }
         out.append("""
@@ -181,7 +180,7 @@ public class Grid {
                 """);
         for (int i= 0; i< table.length; i++) {
             out.append(i+1).append("| ");
-            for (int j = 0; j < table.length; j++) {
+            for (int j = 0; j < table[0].length; j++) {
                 out.append(table[i][j].getName()).append("     ");
             }
             out.append("\n");

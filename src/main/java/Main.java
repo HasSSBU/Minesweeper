@@ -22,7 +22,7 @@ public class Main {
                         if (across >= 0 && across < game.table.length) {
                             System.out.println("Input which tile down (Top:1 -> bottom:" + game.table.length + "): ");
                             down = in.nextInt();
-                            if (down >= 0 && down < game.table.length) {
+                            if (down >= 0 && down < game.table[0].length) {
                                 break;
                             } else {
                                 System.out.println(errorString);
@@ -42,7 +42,7 @@ public class Main {
                         if (across >= 0 && across < game.table.length) {
                             System.out.println("Input which tile down (Top:1 -> bottom:" + game.table.length + "): ");
                             down = in.nextInt() - 1;
-                            if (down >= 0 && down < game.table.length) {
+                            if (down >= 0 && down < game.table[0].length) {
                                 break;
                             } else {
                                 System.out.println(errorString);

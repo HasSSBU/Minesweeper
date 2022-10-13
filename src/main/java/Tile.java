@@ -9,13 +9,6 @@ public class Tile {
     public Tile(){
         this.hidden = true;
         this.flagged = false;
-        this.mine = false;
-        this.value = 0;
-
-    }
-
-    public void tileClick(Tile tile){
-        tile.hidden = false;
     }
 
     public void setFlag(){
@@ -24,17 +17,15 @@ public class Tile {
     public boolean getFlag(){
         return flagged;
     }
-    public void addMine(){
+    public void addNearbyMine(){
         this.value = this.value + 1;
     }
-
     public boolean getMine(){
         return this.mine;
     }
     public int getValue(){
         return this.value;
     }
-
     public void setName(String n){
         this.name = n;
     }
