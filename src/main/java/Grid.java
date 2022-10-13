@@ -9,7 +9,7 @@ public class Grid {
 
     public Grid(){
         table = new Tile[9][9];
-        numbOfMines = 8;
+        numbOfMines = 10;
         setMines(table);
         hiddenTiles = table.length* table.length;
     }
@@ -48,6 +48,14 @@ public class Grid {
                     }else if (i == table.length-1 && j == table.length-1) {
                         table[i - 1][j - 1].addMine();
                         table[i - 1][j].addMine();
+                        table[i][j - 1].addMine();
+                    }else if (i == table.length-1 && j == 0) {
+                        table[i - 1][j + 1].addMine();
+                        table[i - 1][j].addMine();
+                        table[i][j +1].addMine();
+                    }else if (i == 0 && j == table.length-1) {
+                        table[i + 1][j - 1].addMine();
+                        table[i + 1][j].addMine();
                         table[i][j - 1].addMine();
                     }else if(i == 0) {
                         table[i][j - 1].addMine();
@@ -99,6 +107,9 @@ public class Grid {
         }
         if(table[across][down].getMine()){
             this.active = false;
+        }
+        if(table[across][down].getFlag()){
+            this.setFlag(across, down);
         }
         this.table[across][down].setHidden(false);
 
