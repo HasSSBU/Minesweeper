@@ -6,8 +6,8 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String flagOrSel;
         String errorString = "Invalid Input, try again";
-        int across = 0;
-        int down = 0;
+        int across;
+        int down;
 
         Grid game = new Grid();
         System.out.println(game.getTable());
@@ -17,12 +17,12 @@ public class Main {
             switch (flagOrSel) {
                 case ("F") -> {
                     while (true) {
-                        System.out.println("Input which tile across (Left:1 -> Right: " + game.table.length + "): ");
+                        System.out.println("Input which tile across (Left:1 -> Right: " + game.table[0].length + "): ");
                         across = in.nextInt();
-                        if (across >= 0 && across < game.table.length) {
+                        if (across >= 0 && across < game.table[0].length) {
                             System.out.println("Input which tile down (Top:1 -> bottom:" + game.table.length + "): ");
                             down = in.nextInt();
-                            if (down >= 0 && down < game.table[0].length) {
+                            if (down >= 0 && down < game.table.length) {
                                 break;
                             } else {
                                 System.out.println(errorString);
@@ -40,7 +40,7 @@ public class Main {
                         System.out.println("Input which tile across (Left:1 -> Right: " + game.table.length + "): ");
                         across = in.nextInt()-1;
                         if (across >= 0 && across < game.table.length) {
-                            System.out.println("Input which tile down (Top:1 -> bottom:" + game.table.length + "): ");
+                            System.out.println("Input which tile down (Top:1 -> bottom:" + game.table[0].length + "): ");
                             down = in.nextInt() - 1;
                             if (down >= 0 && down < game.table[0].length) {
                                 break;
@@ -51,7 +51,7 @@ public class Main {
                             System.out.println(errorString);
                         }
                     }
-                    game.showTiles(down, across);
+                    game.showTiles(across, down);
                     game.setNames(game.table);
                     System.out.println(game.getTable());
                 }
@@ -61,6 +61,13 @@ public class Main {
         if (game.hiddenTiles == game.numbOfMines) {
             System.out.println("You Win");
         } else {
+            for(int i = 0; i < game.table.length; i++){
+                for(int j =0; j < game.table[0].length; j++){
+                    game.table[i][j].setHidden(false);
+                    game.setNames(game.table);
+                }
+            }
+            System.out.println(game.getTable());
             System.out.println("Game Over");
         }
     }

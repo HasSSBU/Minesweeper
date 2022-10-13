@@ -8,7 +8,7 @@ public class Grid {
     int hiddenTiles;
 
     public Grid(){
-        table = new Tile[9][9];
+        table = new Tile[6][9];
         numbOfMines = 10;
         setMines(table);
         hiddenTiles = table.length * table[0].length;
@@ -171,17 +171,17 @@ public class Grid {
 
     public String getTable() {
         StringBuilder out = new StringBuilder();
-        for (int i= 0; i< table[0].length; i++) {
+        for (int i= 0; i< table.length; i++) {
             out.append("    ").append(i+1).append("  ");
         }
         out.append("""
 
 
                 """);
-        for (int i= 0; i< table.length; i++) {
+        for (int i= 0; i< table[0].length; i++) {
             out.append(i+1).append("| ");
-            for (int j = 0; j < table[0].length; j++) {
-                out.append(table[i][j].getName()).append("     ");
+            for (Tile[] tiles : table) {
+                out.append(tiles[i].getName()).append("     ");
             }
             out.append("\n");
         }
