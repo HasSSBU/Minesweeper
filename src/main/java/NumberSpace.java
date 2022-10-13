@@ -4,8 +4,8 @@ public class NumberSpace extends Tile{
 
     public NumberSpace(){
         super();
-        this.value = 0;
-        this.name = "0";
+        super.value = 0;
+        super.name = "0";
 
     }
 }
