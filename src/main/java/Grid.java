@@ -125,25 +125,7 @@ public class Grid {
             }
         }
     }
-/*
-        This section was my original idea, Spread to one corner of the array then go to the other.
-        Corners weren't certain though so items would get excluded.
 
-        if(this.table[across][down].getValue() == 0 && !this.table[across][down].getHidden()){
-            System.out.println("check 1 good");
-            setNames(this.table);
-            System.out.println(getTable());
-            if(across-1 >= 0) {
-                System.out.println("across good");
-                showTiles(across - 1, down);
-
-            }
-            if (down -1 >= 0){
-                System.out.println("down good");
-                showTiles(across, down -1);
-            }
-        }
-*/
     public void setFlag(int across, int down){
         if(this.table[across][down].getHidden()) {
             this.table[across][down].setFlag();
@@ -165,7 +147,7 @@ public class Grid {
                 } else if (tiles[j].getMine()) {
                     tiles[j].setName(" M");
                 } else {
-                    tiles[j].setName(" " + String.valueOf(tiles[j].value));
+                    tiles[j].setName(" " + tiles[j].value);
                 }
             }
         }
@@ -184,7 +166,6 @@ public class Grid {
             out.append(i+1).append("| ");
             for (int j = 0; j < table.length; j++) {
                 out.append(table[i][j].getName()).append("     ");
-                //out += i + "," + j + "    ";
             }
             out.append("\n");
         }

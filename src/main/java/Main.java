@@ -5,6 +5,7 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         String flagOrSel;
+        String errorString = "Invalid Input, try again";
         int across = 0;
         int down = 0;
 
@@ -24,10 +25,10 @@ public class Main {
                             if (down >= 0 && down < game.table.length) {
                                 break;
                             } else {
-                                System.out.println("invalid input");
+                                System.out.println(errorString);
                             }
                         } else {
-                            System.out.println("invalid input");
+                            System.out.println(errorString);
                         }
                     }
                     game.setFlag(down -1, across -1);
@@ -44,17 +45,17 @@ public class Main {
                             if (down >= 0 && down < game.table.length) {
                                 break;
                             } else {
-                                System.out.println("invalid input");
+                                System.out.println(errorString);
                             }
                         } else {
-                            System.out.println("invalid input");
+                            System.out.println(errorString);
                         }
                     }
                     game.showTiles(down, across);
                     game.setNames(game.table);
                     System.out.println(game.getTable());
                 }
-                default -> System.out.println("invalid input, try again");
+                default -> System.out.println(errorString);
             }
         }
         if (game.hiddenTiles == game.numbOfMines) {
