@@ -18,4 +18,5 @@ public class MineTest {
     public void testMineIsMine(){
         Assertions.assertEquals(true, testMine.getMine(), "mine dont generate properly");
     }
+
 }
