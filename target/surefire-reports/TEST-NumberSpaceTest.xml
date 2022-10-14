@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="MineTest" time="0.044" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="NumberSpaceTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="18.0.2.1+1-1"/>
@@ -59,7 +59,8 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="MineTest" name="testMineIsMine" time="0.042"/>
-  <testcase classname="MineTest" name="testMineName" time="0.001"/>
-  <testcase classname="MineTest" name="testMineValue" time="0.001"/>
+  <testcase classname="NumberSpaceTest" name="testNumberSpaceValueUpdate" time="0"/>
+  <testcase classname="NumberSpaceTest" name="testNumberSpaceName" time="0"/>
+  <testcase classname="NumberSpaceTest" name="testNumberSpaceValue" time="0.002"/>
+  <testcase classname="NumberSpaceTest" name="testNumberSpaceIsMine" time="0"/>
 </testsuite>

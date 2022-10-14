@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class MineTest {
     Tile testMine = new Mine();
 
-    @Test
+    @org.junit.Test
     public void testMineValue() {
         Assertions.assertEquals(-2, testMine.getValue(), "NumberSpaces dont generate with value of -2");
     }
