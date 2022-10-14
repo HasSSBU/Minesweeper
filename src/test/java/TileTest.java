@@ -11,7 +11,23 @@ public class TileTest {
     }
     @Test
     public void testTileIsUnflagged() {
+        Assertions.assertEquals(false, testTile.getFlag(), "tiles generate as unflagged");
+    }
+    @Test
+    public void testFlagTile() {
+        testTile.setFlag();
+        Assertions.assertEquals(true, testTile.getFlag(), "tiles generate as flagged");
+        testTile.setFlag();
         Assertions.assertEquals(false, testTile.getFlag(), "tiles generate as flagged");
+    }
+    @Test
+    public void testAddNearbyMine() {
+        testTile.addNearbyMine();
+        Assertions.assertEquals(1,testTile.getValue());
+    }
+    @Test
+    public void testGetValue() {
+        Assertions.assertEquals(0, testTile.getValue(), "tiles generate as flagged");
     }
     @Test
     public void testTileIsNotMine() {
@@ -20,14 +36,13 @@ public class TileTest {
     @Test
     public void testTileSetHidden() {
         testTile.setHidden(false);
-        Assertions.assertEquals(false, testTile.getHidden(), "tiles set to be shown");
+        Assertions.assertEquals(false, testTile.getHidden(), "unflagged tile flagged");
         testTile.setHidden(true);
+        Assertions.assertEquals(true, testTile.getHidden(), "flagged tile not unflagged");
     }
     @Test
-    public void testTileSetFlag() {
-        testTile.setFlag();
-        Assertions.assertEquals(true, testTile.getHidden(), "tiles set to be shown");
-        testTile.setFlag();
+    public void testTileGetName() {
+        Assertions.assertEquals("0", testTile.getName(), "tiles set to be shown");
     }
     @Test
     public void testTileSetName() {
