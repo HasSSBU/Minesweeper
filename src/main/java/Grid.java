@@ -8,7 +8,7 @@ public class Grid {
     int hiddenTiles;
 
     public Grid(){
-        table = new Tile[6][9];
+        table = new Tile[9][9];
         numbOfMines = 10;
         setMines(table);
         hiddenTiles = table.length * table[0].length;
