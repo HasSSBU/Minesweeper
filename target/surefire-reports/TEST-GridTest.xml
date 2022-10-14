@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="GridTest" time="0.153" errors="0" skipped="0">
+<testsuite tests="19" failures="0" name="GridTest" time="0.372" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="18.0.2.1+1-1"/>
@@ -59,15 +59,23 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="GridTest" name="testSetAllToFlag" time="0.11"/>
-  <testcase classname="GridTest" name="testSetValuesSomeTiles" time="0.004"/>
-  <testcase classname="GridTest" name="testRemoveFlags" time="0.002"/>
-  <testcase classname="GridTest" name="testShowTilesAt0InacessibleTiles" time="0.015"/>
-  <testcase classname="GridTest" name="testShowTilesAt0NoMines" time="0.005"/>
-  <testcase classname="GridTest" name="testHiddenUpdate" time="0.003"/>
-  <testcase classname="GridTest" name="testShowTilesAt0AccessibleTiles" time="0.007"/>
-  <testcase classname="GridTest" name="testSetSomeToFlag" time="0.007"/>
+  <testcase classname="GridTest" name="testSetAllToFlag" time="0.192"/>
+  <testcase classname="GridTest" name="testShowTilesGameWin" time="0.013"/>
+  <testcase classname="GridTest" name="testSetValuesSomeTiles" time="0.006"/>
+  <testcase classname="GridTest" name="testSetNameUnhidden" time="0.006"/>
+  <testcase classname="GridTest" name="testSetNameFlag" time="0.007"/>
+  <testcase classname="GridTest" name="testSetNameMine" time="0.003"/>
+  <testcase classname="GridTest" name="testRemoveFlags" time="0.003"/>
+  <testcase classname="GridTest" name="testSetNameOther" time="0.009"/>
+  <testcase classname="GridTest" name="testShowTilesAt0InacessibleTiles" time="0.012"/>
+  <testcase classname="GridTest" name="testShowTilesAt0NoMines" time="0.019"/>
+  <testcase classname="GridTest" name="testHiddenUpdate" time="0.03"/>
+  <testcase classname="GridTest" name="testShowTilesGameOver" time="0.038"/>
+  <testcase classname="GridTest" name="testShowTilesAt0AccessibleTiles" time="0.022"/>
+  <testcase classname="GridTest" name="testSetSomeToFlag" time="0"/>
   <testcase classname="GridTest" name="testSetZeroes" time="0"/>
+  <testcase classname="GridTest" name="testSetFlag" time="0"/>
   <testcase classname="GridTest" name="testSetValuesAllTiles" time="0"/>
-  <testcase classname="GridTest" name="testPopulateMines" time="0"/>
+  <testcase classname="GridTest" name="testShowTilesFlagged" time="0"/>
+  <testcase classname="GridTest" name="testPopulateMines" time="0.012"/>
 </testsuite>

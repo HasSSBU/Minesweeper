@@ -189,4 +189,60 @@ public class GridTest {
             }
         }
     }
+    @org.junit.Test
+    public void testShowTilesGameWin(){
+        testGrid.hiddenTiles = 11;
+        testGrid.showTiles(1,1);
+        Assertions.assertEquals(false, testGrid.active);
+    }
+
+    @org.junit.Test
+    public void testShowTilesGameOver(){
+        testGrid.table[1][1] = new Mine();
+        testGrid.showTiles(1,1);
+        Assertions.assertEquals(false, testGrid.active);
+    }
+
+    @org.junit.Test
+    public void testShowTilesFlagged(){
+        testGrid.setFlag(1,1);
+        testGrid.showTiles(1,1);
+        Assertions.assertEquals(false, testGrid.table[1][1].getFlag());
+    }
+
+    @org.junit.Test
+    public void testSetFlag(){
+        testGrid.setFlag(1,1);
+        Assertions.assertEquals(true, testGrid.table[1][1].getFlag());
+        testGrid.setFlag(1,1);
+        Assertions.assertEquals(false, testGrid.table[1][1].getFlag());
+    }
+
+    @org.junit.Test
+    public void testSetNameUnhidden(){
+        testGrid.table[1][1].setHidden(true);
+        testGrid.setNames(testGrid.table);
+        Assertions.assertEquals("[]", testGrid.table[1][1].getName());
+    }
+    @org.junit.Test
+    public void testSetNameFlag(){
+        testGrid.table[1][1].setFlag();
+        testGrid.table[1][1].setHidden(false);
+        testGrid.setNames(testGrid.table);
+        Assertions.assertEquals(" #", testGrid.table[1][1].getName());
+    }
+    @org.junit.Test
+    public void testSetNameMine(){
+        testGrid.table[1][1] = new Mine();
+        testGrid.table[1][1].setHidden(false);
+        testGrid.setNames(testGrid.table);
+        Assertions.assertEquals(" M", testGrid.table[1][1].getName());
+    }
+    @org.junit.Test
+    public void testSetNameOther(){
+        testGrid.table[1][1].setHidden(false);
+        String testCase = String.valueOf(testGrid.table[1][1].value);
+        testGrid.setNames(testGrid.table);
+        Assertions.assertEquals(" " + testCase, testGrid.table[1][1].getName());
+    }
 }
