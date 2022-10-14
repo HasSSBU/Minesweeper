@@ -48,10 +48,10 @@ public class Grid {
 <span class="fc" id="L48">                        table[i - 1][j - 1].addNearbyMine();</span>
 <span class="fc" id="L49">                        table[i - 1][j].addNearbyMine();</span>
 <span class="fc" id="L50">                        table[i][j - 1].addNearbyMine();</span>
-<span class="pc bpc" id="L51" title="1 of 4 branches missed.">                    }else if (i == table.length-1 &amp;&amp; j == 0) {</span>
-<span class="nc" id="L52">                        table[i - 1][j + 1].addNearbyMine();</span>
-<span class="nc" id="L53">                        table[i - 1][j].addNearbyMine();</span>
-<span class="nc" id="L54">                        table[i][j +1].addNearbyMine();</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">                    }else if (i == table.length-1 &amp;&amp; j == 0) {</span>
+<span class="fc" id="L52">                        table[i - 1][j + 1].addNearbyMine();</span>
+<span class="fc" id="L53">                        table[i - 1][j].addNearbyMine();</span>
+<span class="fc" id="L54">                        table[i][j +1].addNearbyMine();</span>
 <span class="fc bfc" id="L55" title="All 4 branches covered.">                    }else if (i == 0 &amp;&amp; j == table[0].length-1) {</span>
 <span class="fc" id="L56">                        table[i + 1][j - 1].addNearbyMine();</span>
 <span class="fc" id="L57">                        table[i + 1][j].addNearbyMine();</span>
